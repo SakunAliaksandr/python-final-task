@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}<title>{{ todo.title }}</title>{% endblock %}
+
+{% block content %}
+    <h3>HELLO WORLD its todo LIST</h3>
+
+    {% for todo in todos %}
+        <em>Titile: </em> {{ todo.title }}<br>{{ todo.user }}<br>
+    {% endfor %}
+
+{% endblock %}

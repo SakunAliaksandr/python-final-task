@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}<title>Todo list</title>{% endblock %}
+{% block content %}
+    <h1>To-do list</h1>
+    <form action="{% url 'TodoList' %}" method="POST">
+        {% csrf_token %}
+        <label> <em>Add task name</em>:
+            <input type="text" name="description" placeholder="Enter task name" required>
+        </label><br>
+        <label> <em>Add task text:</em></label><br>
+        <textarea rows="3" cols="37" name="task_text"></textarea>
+        <br>
+        <label><em>Choose category:</em></label>
+        <select id="category" class="select" name="category_select" required>
+            {% for category in categories %}
+                <option class="" value="{{ category.name }}" name="{{ category.name }}">
+                    {{ category.name }}</option>
+            {% endfor %}
+        </select><br>
+        <label><em>Due date:</em></label>
+        <input type="date" name="date" required><br>
+        <input type="hidden" name="user" value="{{ user.get_username }}">
+
+
+        <input name="Add" type="submit" value="Add task">
+        <button class="button is-link" name="Delete" formnovalidate="" type="submit">Deleted task</button>
+        <br>
+
+        <label><h3>Task list:</h3></label><br>
+        {% for todo in todos %}
+            <input type="checkbox" name="checkedbox" value="{{ todo.id }}">
+            <em><strong>{{ todo.title }}</strong> - </em>{{ todo.due_date }}<br>
+            <em><a href="{% url 'todo-detail' todo.id %}">{{ todo.title }}</a> </em><br>
+        {% endfor %}
+    </form>
+{% endblock %}

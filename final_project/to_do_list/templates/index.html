@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}<title>Home page</title>{% endblock %}
+
+{% block content %}
+<h1>To-Do list home</h1>
+
+  <p>Welcome to Simple To-Do list, a very basic Django website developed by Sakun Aliaksandr.</p>
+    {% if user.is_authenticated %}
+        <p>Hello<strong> {{ user.get_username }}</strong> you have <b><em>{{ todo_count }}</em></b> tasks in <b><em>{{ categories_count }}</em></b> categories:</p>
+        <li><a href="{% url 'TodoList' %}">Todo list</a> </li>
+        <li><a href="{% url 'Category' %}">Categories</a> </li>
+    {% else %}
+        <p>To see your tasks you must login or register.</p>
+    {% endif %}
+{% endblock %}

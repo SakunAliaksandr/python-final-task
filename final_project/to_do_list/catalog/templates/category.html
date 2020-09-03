@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}<title>Categories</title>{% endblock %}
+{% block content %}
+<div class="columns has-background-link has-text-white is-centered" style="min-height: 101vh;">
+	<div class="column is-half">
+    	<h1 class="is-size-4 has-text-centered"> Edit your categories </h1>
+    	<form action="" method="post">
+        	{% csrf_token %}
+            <div class="field has-text-centered">
+            	<label for="description" class="label has-text-white-bis"> Enter category </label>
+            	<div class="control">
+     	           <input type="text" id="description" class="input" placeholder="Enter new category here"
+                    	name="name" required>
+            	</div>
+            	<div class="field">
+                	<button class="button is-primary" name="Add" type="submit">
+                    	<span class="icon is-small">
+                        	<i class="fa fa-plus"></i>
+                    	</span>
+                    	<span>Add new category</span>
+                	</button>
+                	<button class="button is-danger" name="Delete" formnovalidate="" type="submit">
+                    	<span class="icon is-small">
+           	             <i class="fa fa-trash-o"></i>
+                    	</span>
+	                    <span> Deleted category </span>
+                	</button>
+            	</div>
+            </div>
+
+            <div class="list is-hoverable">
+            	{% for category in categories %}
+            	<div class="list-item">
+                	<label class="checkbox">
+                    	<input type="checkbox" class="checkbox" name="check" value="{{category.id}}">
+                    	<span class="complete-">{{ category.name }}</span>
+                	</label>
+            	</div>
+            	{% endfor %}
+
+        	</div>
+    	</form>
+	</div>
+</div>
+{% endblock %}
